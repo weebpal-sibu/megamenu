@@ -1,0 +1,7 @@
+html{
+	font-size: 100%;
+}
+
+// IconArrow
+@include icons(ico-arrow, 11px, 11px, false);
+@include icons(ico-arrow-white, 11px, 11px, false);
