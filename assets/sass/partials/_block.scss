@@ -347,8 +347,8 @@
 			// &:after{
 			// 	display: none !important;
 			// }
-			&:before{
-				display: none !important;
+			&:before, &:after{
+				display: none;
 			}
 		}
 		> .we-mega-menu-submenu{
@@ -356,7 +356,7 @@
 			position: static;
 			margin: 0;
 			padding: 0;
-			background-color: $white-color !important;
+			// background-color: $white-color !important;
 			border: 0 none !important;
 			@include box-shadow(none !important);
 			min-width: initial;
@@ -381,7 +381,7 @@
 		left: 50%;
 		@include translateX(-50%);
 		top: 100%;
-		margin-top: 5px;
+		@include sizeRem(margin-top, 5px);
 	}
 	.justify{
 		position: static;
@@ -389,7 +389,8 @@
 			min-width: 100%;
 			width: 100%;
 			top: 100%;
-			margin-top: 5px;
+			@include sizeRem(margin-top, 5px);
+			
 		}		
 	}
 	.we-mega-menu-submenu{
@@ -458,6 +459,9 @@
 	.we-mega-menu-col{
 	    > *{
 	    	@include sizeRemAll(padding, 10px, 10px, 10px, 10px);
+	    }
+	    iframe{
+	    	width: 100%;
 	    }
 	}
 	&.admin{
@@ -551,7 +555,7 @@
 					&:before,&:after{
 						content:'';
 						position: absolute;
-						right: 15px;
+						@include sizeRem(right, 15px);
 						top: 50%;
 						@include sizeRem(margin-top, -5px);
 					}	
@@ -568,7 +572,7 @@
 						&:after{
 							@include rotate(-90deg);
 							position:absolute;
-							@include sizeRem(right, 5px);
+							@include sizeRem(right, 0px);
 							top: 50%;
 							@include sizeRem(margin-top, -5px);
 						}
@@ -610,7 +614,7 @@
 				}
 				> .we-mega-menu-submenu{
 					// @include sizeRem(margin-top, -2px);
-					margin-top: 0;
+					@include sizeRem(margin-top, 8px);
 				}
 				
 			}
@@ -639,8 +643,8 @@
 		}
 		.we-mega-menu-submenu{
 			position:absolute;
-			top: 100%;
-			left: 0;
+			// top: 100%;
+			// left: 0;
 			border: 1px solid $border-color;
 			@include sizeRemAll(padding, 10px, 10px, 10px, 10px);
 			@include sizeRem(margin-top, 10px);
@@ -659,7 +663,7 @@
 					@include sizeRemAll(padding, 5px, 20px, 5px, 10px);
 				    border: 1px dotted $border-color;
 				    @include border-radius-rem(3px);
-				    @include sizeRem(font-size, 16px);
+				    @include sizeRem(font-size, 14px);
 				    @include wp-font(font-semibold);
 				    color: $black-color;
 				    @include transition(all 0.1s);

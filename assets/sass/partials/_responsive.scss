@@ -49,8 +49,6 @@ nav[data-style = "Blue"]{
 	}
 
 	.we-mega-menu-submenu{
-		// border-color: $border-color;
-		// background-color: $link-color;
 		li.we-mega-menu-li a{
 			color: $link-color;
 		}
@@ -59,28 +57,58 @@ nav[data-style = "Blue"]{
 		color: $bg-color;
 	}
 
-	// .we-mega-menu-col{
-	// 	border-color: $border-color;
-	// }
-	// .we-mega-menu-submenu li.we-mega-menu-li a{
-	// 	border-color: $border-color;
-	// }
+	// Front End
+	body:not(.we-mega-menu-backend) &{
+		background-color: $link-color;
 
-	
-	// .nav .open>a, .nav .open>a:focus, .nav .open>a:hover,
-	// .nav>li>a:focus, .nav>li>a:hover{
-	// 	background-color: $bg-color;
-	// 	color: $body-color;
-	// 	&:after{
-	// 		// border-top-color: $body-color !important;
-	// 	}
-	// }
-	// .we-mega-menu-submenu li.we-mega-menu-li.open > a{
-	// 	color: $body-color;
-	// 	&:after{
-	// 		border-top-color: $body-color;	
-	// 	}
-	// }
+		.we-mega-menu-ul {
+			> .we-mega-menu-li{
+				border-left-color: darken($link-color, 5%);
+				> a{
+					&:hover, &:focus{
+						background-color: darken($link-color, 5%);
+						color: $white-color;
+					}
+				}
+				&.active, &.active-trail{
+					> a{
+						background-color: darken($link-color, 5%);
+						color: $white-color;
+					}
+				}
+			}
+			> .dropdown-menu{
+				&:hover, &:focus{
+					> a{
+						background-color: darken($link-color, 5%);
+						color: $white-color;
+					}
+				}
+			}
+			.dropdown-menu .dropdown-menu > a{
+				&:before {
+					@include opacity(0);
+				}
+				&:after {
+					@include opacity(1);
+				}
+			}
+		}
+		.we-mega-menu-submenu {
+			border-color: darken($link-color, 5%);
+			background-color: darken($link-color, 5%);
+			li.we-mega-menu-li a{
+				color: darken($body-color, 15%);
+				border-bottom-color: darken($body-color, 15%);
+				&:hover, &:focus{
+					color: $white-color;
+					border-bottom-color: $white-color;
+				}
+			}
+		}
+
+	}
+
 }
 
 // ====================
@@ -92,64 +120,8 @@ nav[data-style = "Red"]{
 	$border-color: darken($link-color, 10%);
 	$bg-color: $link-color;
 
-	// .we-mega-menu-ul {
-	// 	> .we-mega-menu-li > a.we-mega-menu-li{
-	// 		color: $body-color;
-	// 		border-color: $border-color;
-	// 		background-color: $link-color;
-	// 	}
-	// 	.dropdown-menu {
-	// 		> a:after{
-	// 			border-top-color: $body-color;
-	// 		}
-	// 		.dropdown-menu > a{
-	// 			&:after{
-	// 				border-top-color: $bg-color;
-	// 			}
-	// 			&:hover, &:focus{
-	// 				&:after{
-	// 					border-top-color: $body-color;
-	// 				}
-	// 			}
-	// 		}
-	// 	}
-	// }
-
-	// .we-mega-menu-submenu{
-	// 	border-color: $border-color;
-	// 	background-color: $link-color;
-	// 	li.we-mega-menu-li a{
-	// 		color: $link-color;
-	// 	}
-	// }
-
-	// .we-mega-menu-col{
-	// 	border-color: $border-color;
-	// }
-	// .we-mega-menu-submenu li.we-mega-menu-li a{
-	// 	border-color: $border-color;
-	// }
-
-	// .navbar-we-mega-menu .we-mega-menu-submenu a i{
-	// 	color: $bg-color;
-	// }
-	// .nav .open>a, .nav .open>a:focus, .nav .open>a:hover,
-	// .nav>li>a:focus, .nav>li>a:hover{
-	// 	background-color: $bg-color;
-	// 	color: $body-color;
-	// 	&:after{
-	// 		// border-top-color: $body-color !important;
-	// 	}
-	// }
-	// .we-mega-menu-submenu li.we-mega-menu-li.open > a{
-	// 	color: $body-color;
-	// 	&:after{
-	// 		border-top-color: $body-color;	
-	// 	}
-	// }
-
 	.we-mega-menu-ul {
-		> .we-mega-menu-li > a.we-mega-menu-li{
+		> .we-mega-menu-li > a{
 			color: $body-color;
 			border-color: $border-color;
 			background-color: $link-color;
@@ -191,14 +163,64 @@ nav[data-style = "Red"]{
 	}
 
 	.we-mega-menu-submenu{
-		// border-color: $border-color;
-		// background-color: $link-color;
 		li.we-mega-menu-li a{
 			color: $link-color;
 		}
 	}
 	.navbar-we-mega-menu .we-mega-menu-submenu a i{
 		color: $bg-color;
+	}
+
+	
+	// Front End
+	body:not(.we-mega-menu-backend) &{
+		background-color: $link-color;
+
+		.we-mega-menu-ul {
+			> .we-mega-menu-li{
+				border-left-color: darken($link-color, 5%);
+				> a{
+					&:hover, &:focus{
+						background-color: darken($link-color, 5%);
+						color: $white-color;
+					}
+				}
+				&.active, &.active-trail{
+					> a{
+						background-color: darken($link-color, 5%);
+						color: $white-color;
+					}
+				}
+			}
+			> .dropdown-menu{
+				&:hover, &:focus{
+					> a{
+						background-color: darken($link-color, 5%);
+						color: $white-color;
+					}
+				}
+			}
+			.dropdown-menu .dropdown-menu > a{
+				&:before {
+					@include opacity(0);
+				}
+				&:after {
+					@include opacity(1);
+				}
+			}
+		}
+		.we-mega-menu-submenu {
+			border-color: darken($link-color, 5%);
+			background-color: darken($link-color, 5%);
+			li.we-mega-menu-li a{
+				color: darken($body-color, 15%);
+				border-bottom-color: darken($body-color, 15%);
+				&:hover, &:focus{
+					color: $white-color;
+					border-bottom-color: $white-color;
+				}
+			}
+		}
 	}
 }
 
@@ -211,62 +233,6 @@ nav[data-style = "Yellow"]{
 	$border-color: darken($link-color, 10%);
 	$bg-color: $link-color;
 
-	// .we-mega-menu-ul {
-	// 	> .we-mega-menu-li > a.we-mega-menu-li{
-	// 		color: $body-color;
-	// 		border-color: $border-color;
-	// 		background-color: $link-color;
-	// 	}
-	// 	.dropdown-menu {
-	// 		> a:after{
-	// 			border-top-color: $body-color;
-	// 		}
-	// 		.dropdown-menu > a{
-	// 			&:after{
-	// 				border-top-color: $bg-color;
-	// 			}
-	// 			&:hover, &:focus{
-	// 				&:after{
-	// 					border-top-color: $body-color;
-	// 				}
-	// 			}
-	// 		}
-	// 	}
-	// }
-
-	// .we-mega-menu-submenu{
-	// 	border-color: $border-color;
-	// 	background-color: $link-color;
-	// 	li.we-mega-menu-li a{
-	// 		color: $link-color;
-	// 	}
-	// }
-
-	// .we-mega-menu-col{
-	// 	border-color: $border-color;
-	// }
-	// .we-mega-menu-submenu li.we-mega-menu-li a{
-	// 	border-color: $border-color;
-	// }
-
-	// .navbar-we-mega-menu .we-mega-menu-submenu a i{
-	// 	color: $bg-color;
-	// }
-	// .nav .open>a, .nav .open>a:focus, .nav .open>a:hover,
-	// .nav>li>a:focus, .nav>li>a:hover{
-	// 	background-color: $bg-color;
-	// 	color: $body-color;
-	// 	&:after{
-	// 		// border-top-color: $body-color !important;
-	// 	}
-	// }
-	// .we-mega-menu-submenu li.we-mega-menu-li.open > a{
-	// 	color: $body-color;
-	// 	&:after{
-	// 		border-top-color: $body-color;	
-	// 	}
-	// }
-
 	.we-mega-menu-ul {
 		> .we-mega-menu-li > a.we-mega-menu-li{
 			color: $body-color;
@@ -318,6 +284,58 @@ nav[data-style = "Yellow"]{
 	}
 	.navbar-we-mega-menu .we-mega-menu-submenu a i{
 		color: $bg-color;
+	}
+
+
+	// Front End
+	body:not(.we-mega-menu-backend) &{
+		background-color: $link-color;
+
+		.we-mega-menu-ul {
+			> .we-mega-menu-li{
+				border-left-color: darken($link-color, 5%);
+				> a{
+					&:hover, &:focus{
+						background-color: darken($link-color, 5%);
+						color: $white-color;
+					}
+				}
+				&.active, &.active-trail{
+					> a{
+						background-color: darken($link-color, 5%);
+						color: $white-color;
+					}
+				}
+			}
+			> .dropdown-menu{
+				&:hover, &:focus{
+					> a{
+						background-color: darken($link-color, 5%);
+						color: $white-color;
+					}
+				}
+			}
+			.dropdown-menu .dropdown-menu > a{
+				&:before {
+					@include opacity(0);
+				}
+				&:after {
+					@include opacity(1);
+				}
+			}
+		}
+		.we-mega-menu-submenu {
+			border-color: darken($link-color, 5%);
+			background-color: darken($link-color, 5%);
+			li.we-mega-menu-li a{
+				color: darken($body-color, 15%);
+				border-bottom-color: darken($body-color, 15%);
+				&:hover, &:focus{
+					color: $white-color;
+					border-bottom-color: $white-color;
+				}
+			}
+		}
 	}
 }
 
@@ -330,62 +348,6 @@ nav[data-style = "Green"]{
 	$border-color: darken($link-color, 10%);
 	$bg-color: $link-color;
 
-	// .we-mega-menu-ul {
-	// 	> .we-mega-menu-li > a.we-mega-menu-li{
-	// 		color: $body-color;
-	// 		border-color: $border-color;
-	// 		background-color: $link-color;
-	// 	}
-	// 	.dropdown-menu {
-	// 		> a:after{
-	// 			border-top-color: $body-color;
-	// 		}
-	// 		.dropdown-menu > a{
-	// 			&:after{
-	// 				border-top-color: $bg-color;
-	// 			}
-	// 			&:hover, &:focus{
-	// 				&:after{
-	// 					border-top-color: $body-color;
-	// 				}
-	// 			}
-	// 		}
-	// 	}
-	// }
-
-	// .we-mega-menu-submenu{
-	// 	border-color: $border-color;
-	// 	background-color: $link-color;
-	// 	li.we-mega-menu-li a{
-	// 		color: $link-color;
-	// 	}
-	// }
-
-	// .we-mega-menu-col{
-	// 	border-color: $border-color;
-	// }
-	// .we-mega-menu-submenu li.we-mega-menu-li a{
-	// 	border-color: $border-color;
-	// }
-
-	// .navbar-we-mega-menu .we-mega-menu-submenu a i{
-	// 	color: $bg-color;
-	// }
-	// .nav .open>a, .nav .open>a:focus, .nav .open>a:hover,
-	// .nav>li>a:focus, .nav>li>a:hover{
-	// 	background-color: $bg-color;
-	// 	color: $body-color;
-	// 	&:after{
-	// 		// border-top-color: $body-color !important;
-	// 	}
-	// }
-	// .we-mega-menu-submenu li.we-mega-menu-li.open > a{
-	// 	color: $body-color;
-	// 	&:after{
-	// 		border-top-color: $body-color;	
-	// 	}
-	// }
-
 	.we-mega-menu-ul {
 		> .we-mega-menu-li > a.we-mega-menu-li{
 			color: $body-color;
@@ -437,6 +399,57 @@ nav[data-style = "Green"]{
 	}
 	.navbar-we-mega-menu .we-mega-menu-submenu a i{
 		color: $bg-color;
+	}
+
+	// Front End
+	body:not(.we-mega-menu-backend) &{
+		background-color: $link-color;
+
+		.we-mega-menu-ul {
+			> .we-mega-menu-li{
+				border-left-color: darken($link-color, 5%);
+				> a{
+					&:hover, &:focus{
+						background-color: darken($link-color, 5%);
+						color: $white-color;
+					}
+				}
+				&.active, &.active-trail{
+					> a{
+						background-color: darken($link-color, 5%);
+						color: $white-color;
+					}
+				}
+			}
+			> .dropdown-menu{
+				&:hover, &:focus{
+					> a{
+						background-color: darken($link-color, 5%);
+						color: $white-color;
+					}
+				}
+			}
+			.dropdown-menu .dropdown-menu > a{
+				&:before {
+					@include opacity(0);
+				}
+				&:after {
+					@include opacity(1);
+				}
+			}
+		}
+		.we-mega-menu-submenu {
+			border-color: darken($link-color, 5%);
+			background-color: darken($link-color, 5%);
+			li.we-mega-menu-li a{
+				color: darken($body-color, 15%);
+				border-bottom-color: darken($body-color, 15%);
+				&:hover, &:focus{
+					color: $white-color;
+					border-bottom-color: $white-color;
+				}
+			}
+		}
 	}
 }
 
@@ -500,6 +513,7 @@ nav[data-animation = "Elastic"]{
 		@include animation-duration(0.5s);
 	}
 }
+
 
 
 
