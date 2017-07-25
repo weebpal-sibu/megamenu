@@ -9,6 +9,7 @@ Drupal.WeMegaMenuFrontEnd.megamenuActivated = false;
     attach: function (context) {
       $(window).load(function() {
         Drupal.WeMegaMenuFrontEnd.init();
+        Drupal.WeMegaMenuFrontEnd.mobileMenu();
       })
     }
   };
@@ -22,11 +23,15 @@ Drupal.WeMegaMenuFrontEnd.megamenuActivated = false;
   	if(megamenu.hasClass('click-action')) {
   	  megamenu.find('ul li.dropdown-menu > a').click(function() {
   	  	var li = $(this).closest("li");
+
   	  	if(li.hasClass("clicked")) {
+          li.closest('ul').find('li').removeClass('clicked');
+          li.closest('.we-mega-menu-row').find('li').removeClass('clicked');
   	  	  li.removeClass("clicked");
           megamenu.removeClass("has-clicked");
-  	  	}
-  	  	else {
+  	  	} else {
+          li.closest('ul').find('li').removeClass('clicked');
+          li.closest('.we-mega-menu-row').find('li').removeClass('clicked');
 	  	    li.closest("ul").children("li.dropdown-menu").removeClass("clicked");
   		    li.addClass("clicked");
           megamenu.addClass("has-clicked");
@@ -48,5 +53,11 @@ Drupal.WeMegaMenuFrontEnd.megamenuActivated = false;
         megamenu.removeClass("has-clicked");
       });
   	}
+  };
+
+  Drupal.WeMegaMenuFrontEnd.mobileMenu = function() {
+      $('#menu-toggle').mobileMenu({
+          targetWrapper: '.navbar-we-mega-menu',
+      });
   };
 })(jQuery, Drupal, drupalSettings);

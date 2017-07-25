@@ -1,4 +1,12 @@
 <?php
+
+/**
+ * @file
+ * WeebPal Mega Menu Module.
+ */
+
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Block\BlockPluginInterface;
 use Drupal\we_megamenu\WeMegaMenuBuilder;
 use Drupal\Core\Template\Attribute;
 
@@ -137,22 +145,19 @@ function we_megamenu_theme($existing, $type, $theme, $path) {
 
 
 /**
- * Prepare variables for we_megamenu_backend.
- *
- * @param array $vars variables are declared in theme.
+ * @param array $vars
+ *   Variables are declared in theme.
  */
-function template_preprocess_we_megamenu_backend(&$vars) {
+function template_preprocess_we_megamenu_backend(array &$vars) {
   $menu_name = $vars['menu_name'];
   $block_theme = $vars['block_theme'];
   $data_config = WeMegaMenuBuilder::loadConfig($menu_name, $block_theme);
 
-  
-
   $block_config = isset($data_config->block_config) ? $data_config->block_config : [];
-  $menu_items = WeMegaMenuBuilder::get_menu_tree_order($menu_name);
+  $menu_items = WeMegaMenuBuilder::getMenuTreeOrder($menu_name);
   $trail = WeMegaMenuBuilder::buildPageTrail($menu_items);
-  
-  $vars['content'] = array(
+
+  $vars['content'] = [
     '#theme' => 'we_megamenu_ul',
     '#items' => $menu_items,
     '#data_config' => $data_config ? $data_config : NULL,
@@ -160,7 +165,7 @@ function template_preprocess_we_megamenu_backend(&$vars) {
     '#block_theme' => $vars['block_theme'],
     '#menu_name' => $vars['menu_name'],
     '#trail' => $trail,
-  );
+  ];
 
   $vars['attributes'] = new Attribute();
   $vars['attributes']['class'] = [];
@@ -172,28 +177,29 @@ function template_preprocess_we_megamenu_backend(&$vars) {
   $vars['attributes']['class'][] = isset($data_config->block_config->{'auto-mobile-collapse'}) == 1 ? 'mobile-collapse' : '';
   $vars['attributes']['data-menu-name'] = $menu_name;
   $vars['attributes']['data-block-theme'] = $block_theme;
-  $vars['attributes']['data-style'] = isset($data_config->block_config->style) ? $data_config->block_config->style:  'Default';
+  $vars['attributes']['data-style'] = isset($data_config->block_config->style) ? $data_config->block_config->style : 'Default';
   $vars['attributes']['data-animation'] = isset($data_config->block_config->animation) ? $data_config->block_config->animation : 'None';
   $vars['attributes']['data-delay'] = isset($data_config->block_config->delay) ? $data_config->block_config->delay : '';
   $vars['attributes']['data-duration'] = isset($data_config->block_config->duration) ? $data_config->block_config->duration : '';
   $vars['attributes']['data-autoarrow'] = isset($data_config->block_config->{'auto-arrow'}) ? $data_config->block_config->{'auto-arrow'} : '';
   $vars['attributes']['data-alwayshowsubmenu'] = isset($data_config->block_config->{'always-show-submenu'}) ? $data_config->block_config->{'always-show-submenu'} : '';
-  $vars['attributes']['data-action'] = isset($data_config->block_config->action) ? $data_config->block_config->action:  'hover';
+  $vars['attributes']['data-action'] = isset($data_config->block_config->action) ? $data_config->block_config->action : 'hover';
   $vars['attributes']['data-mobile-collapse'] = isset($data_config->block_config->{'auto-mobile-collapse'}) ? $data_config->block_config->{'auto-mobile-collapse'} : 0;
 }
 
 /**
  * Prepare variables for we_megamenu_frontend.
  *
- * @param array $vars variables are declared in theme.
+ * @param array $vars
+ *   Variables are declared in theme.
  */
 function template_preprocess_we_megamenu_frontend(&$vars) {
   $menu_name = $vars['menu_name'];
   $block_theme = $vars['block_theme'];
   $data_config = WeMegaMenuBuilder::loadConfig($menu_name, $block_theme);
-  $menu_items = WeMegaMenuBuilder::get_menu_tree_order($menu_name);
+  $menu_items = WeMegaMenuBuilder::getMenuTreeOrder($menu_name);
   $trail = WeMegaMenuBuilder::buildPageTrail($menu_items);
-  $vars['content'] = array(
+  $vars['content'] = [
     '#theme' => 'we_megamenu_ul',
     '#items' => $menu_items,
     '#data_config' => $data_config ? $data_config : NULL,
@@ -201,7 +207,7 @@ function template_preprocess_we_megamenu_frontend(&$vars) {
     '#block_theme' => $vars['block_theme'],
     '#menu_name' => $vars['menu_name'],
     '#trail' => $trail,
-  );
+  ];
 
   $vars['attributes'] = new Attribute();
   $vars['attributes']['class'] = [];
@@ -213,13 +219,13 @@ function template_preprocess_we_megamenu_frontend(&$vars) {
   $vars['attributes']['class'][] = isset($data_config->block_config->{'auto-mobile-collapse'}) == 1 ? 'mobile-collapse' : '';
   $vars['attributes']['data-menu-name'] = $menu_name;
   $vars['attributes']['data-block-theme'] = $block_theme;
-  $vars['attributes']['data-style'] = isset($data_config->block_config->style) ? $data_config->block_config->style:  'Default';
+  $vars['attributes']['data-style'] = isset($data_config->block_config->style) ? $data_config->block_config->style : 'Default';
   $vars['attributes']['data-animation'] = isset($data_config->block_config->animation) ? $data_config->block_config->animation : 'None';
   $vars['attributes']['data-delay'] = isset($data_config->block_config->delay) ? $data_config->block_config->delay : '';
   $vars['attributes']['data-duration'] = isset($data_config->block_config->duration) ? $data_config->block_config->duration : '';
   $vars['attributes']['data-autoarrow'] = isset($data_config->block_config->{'auto-arrow'}) ? $data_config->block_config->{'auto-arrow'} : '';
   $vars['attributes']['data-alwayshowsubmenu'] = isset($data_config->block_config->{'always-show-submenu'}) ? $data_config->block_config->{'always-show-submenu'} : '';
-  $vars['attributes']['data-action'] = isset($data_config->block_config->action) ? $data_config->block_config->action:  'hover';
+  $vars['attributes']['data-action'] = isset($data_config->block_config->action) ? $data_config->block_config->action : 'hover';
   $vars['attributes']['data-mobile-collapse'] = isset($data_config->block_config->{'auto-mobile-collapse'}) ? $data_config->block_config->{'auto-mobile-collapse'} : 0;
   $vars['attributes']['class'][] = $vars['attributes']['data-action'] == 'clicked' ? 'click-action' : 'hover-action';
 }
@@ -227,9 +233,10 @@ function template_preprocess_we_megamenu_frontend(&$vars) {
 /**
  * Prepare variables for we_megamenu_ul.
  *
- * @param array $vars variables are declared in theme.
+ * @param array $vars
+ *   Variables are declared in theme.
  */
-function template_preprocess_we_megamenu_ul(&$vars) {
+function template_preprocess_we_megamenu_ul(array &$vars) {
   $data_config = $vars['data_config'];
   foreach ($vars['items'] as $key_li => $li) {
 
@@ -237,21 +244,23 @@ function template_preprocess_we_megamenu_ul(&$vars) {
     if ($li['url'] == '<front>') {
       $vars['attributes']['data-id'] = 'home';
       $vars['href'] = Drupal::url('<front>');
-    } else {
+    }
+    else {
       $vars['attributes']['data-id'] = !empty($li['derivativeId']) ? $li['derivativeId'] : $li['url'];
       $current_user = \Drupal::currentUser();
       if (WeMegaMenuBuilder::routeExists($li['url'])) {
         $vars['href'] = Drupal::url($li['url']);
-      } else {
+      }
+      else {
         $vars['href'] = $li['url'];
       }
     }
 
-    if (strpos($vars['href'], 'user/logout') !== false && $current_user->id() == 0 && $vars['section'] != 'admin') {
+    if (strpos($vars['href'], 'user/logout') !== FALSE && $current_user->id() == 0 && $vars['section'] != 'admin') {
       continue;
     }
 
-    if (strpos($vars['href'], 'user/login') !== false && $current_user->id() != 0 && $vars['section'] != 'admin') {
+    if (strpos($vars['href'], 'user/login') !== FALSE && $current_user->id() != 0 && $vars['section'] != 'admin') {
       continue; 
     }
 
@@ -272,13 +281,14 @@ function template_preprocess_we_megamenu_ul(&$vars) {
   $vars['attributes']['class'] = [];
   $vars['attributes']['class'][] = 'we-mega-menu-ul';
   $vars['attributes']['class'][] = 'nav';
-  $vars['attributes']['class'][] = 'nav-tabs';   
+  $vars['attributes']['class'][] = 'nav-tabs';
 }
 
 /**
  * Prepare variables for we_megamenu_li.
  *
- * @param array $vars variables are declared in theme.
+ * @param array $vars
+ *   Variables are declared in theme.
  */
 function template_preprocess_we_megamenu_li(&$vars) {
   $menu_name = $vars['menu_name'];
@@ -289,39 +299,38 @@ function template_preprocess_we_megamenu_li(&$vars) {
   $vars['attributes'] = new Attribute();
   $vars['attributes']['class'] = [];
   $vars['attributes']['class'][] = 'we-mega-menu-li';
-  $vars['attributes']['class'][] = sizeof($vars['subtree']) ? 'dropdown-menu' : '';
+  $vars['attributes']['class'][] = count($vars['subtree']) ? 'dropdown-menu' : '';
   $vars['attributes']['data-level'] = $vars['item']['level'];
   $vars['attributes']['data-element-type'] = 'we-mega-menu-li';
   $vars['href'] = '';
   if ($vars['item']['url'] == '<front>') {
     $vars['attributes']['data-id'] = 'home';
     $vars['href'] = Drupal::url('<front>');
-  } else {
+  }
+  else {
     $vars['attributes']['data-id'] = !empty($vars['item']['derivativeId']) ? $vars['item']['derivativeId'] : $vars['item']['url'];
     $vars['href'] = $vars['item']['url'];
   }
-
   
-  $current_user = \Drupal::currentUser();
-  if (strpos($vars['href'], 'user/logout') !== false) {
-    if ($current_user->id() == 0) {
-      return;
-    }
-  }
+  // $current_user = \Drupal::currentUser();
+  // if (strpos($vars['href'], 'user/logout') !== FALSE) {
+  //   if ($current_user->id() == 0) {
+  //     return;
+  //   }
+  // }
 
-  if (strpos($vars['href'], 'user/login') !== false) {
-    if ($current_user->id() == 0) {
-      // is visitor
-    }
-    else {
-      return;
-    }
-  }
+  // if (strpos($vars['href'], 'user/login') !== FALSE) {
+  //   if ($current_user->id() == 0) {
+  //     // is visitor.
+  //   }
+  //   else {
+  //     return;
+  //   }
+  // }
 
   $vars['attributes']['data-submenu'] = 0;
   $vars['attributes']['hide-sub-when-collapse'] = 0;
-
-  if (isset($menu_config->{$vars['attributes']['data-id']}) && sizeof($menu_config->{$vars['attributes']['data-id']}->rows_content)) {
+  if (isset($menu_config->{$vars['attributes']['data-id']})) {
     $item_config = $menu_config->{$vars['attributes']['data-id']};
     $vars['attributes']['class'][] = !empty($item_config->item_config->group) ? 'we-mega-menu-group' : '';
     $vars['attributes']['class'][] = !empty($item_config->item_config->class) ? $item_config->item_config->class : '';
@@ -331,8 +340,8 @@ function template_preprocess_we_megamenu_li(&$vars) {
     $vars['attributes']['data-class'] = !empty($item_config->item_config->class) ? $item_config->item_config->class : '';
     $vars['attributes']['data-icon'] = !empty($item_config->item_config->{'data-icon'}) ? $item_config->item_config->{'data-icon'} : '';
     $vars['attributes']['data-caption'] = !empty($item_config->item_config->{'data-caption'}) ? $item_config->item_config->{'data-caption'} : '';
-    $vars['attributes']['hide-sub-when-collapse'] = !empty($item_config->item_config->{'hide_sub_when_collapse'}) ? $item_config->item_config->{'hide_sub_when_collapse'} : '';;
-    $vars['attributes']['data-alignsub'] = !empty($item_config->item_config->{'data-alignsub'}) ? $item_config->item_config->{'data-alignsub'} : '';;
+    $vars['attributes']['hide-sub-when-collapse'] = !empty($item_config->item_config->{'hide_sub_when_collapse'}) ? $item_config->item_config->{'hide_sub_when_collapse'} : '';
+    $vars['attributes']['data-alignsub'] = !empty($item_config->item_config->{'data-alignsub'}) ? $item_config->item_config->{'data-alignsub'} : '';
   }
 
   $trail = $vars['trail'];
@@ -353,9 +362,11 @@ function template_preprocess_we_megamenu_li(&$vars) {
       '#menu_name' => $vars['menu_name'],
       '#trail' => $vars['trail'],
     ];
+    $vars['items'] = $vars['subtree'];
     $vars['attributes']['data-submenu'] = 1;
     $vars['attributes']['data-group'] = !empty($item_config->item_config->group) ? $item_config->item_config->group : 0;
-  } elseif (isset($menu_config->{$vars['attributes']['data-id']}) && sizeof($menu_config->{$vars['attributes']['data-id']}->rows_content)) {
+  }
+  elseif (isset($menu_config->{$vars['attributes']['data-id']}) && count($menu_config->{$vars['attributes']['data-id']}->rows_content)) {
     $item_config = $menu_config->{$vars['attributes']['data-id']};
     $vars['content'] = [
       '#theme' => 'we_megamenu_submenu',
@@ -372,14 +383,15 @@ function template_preprocess_we_megamenu_li(&$vars) {
 }
 
 /**
- * Prepare variables for we_megamenu_submenu
+ * Prepare variables for we_megamenu_submenu.
  *
- * @param array $vars variables are declared in theme.
+ * @param array $vars
+ *   Variables are declared in theme.
  */
-function template_preprocess_we_megamenu_submenu(&$vars) {
+function template_preprocess_we_megamenu_submenu(array &$vars) {
   $item_config = $vars['item_config'];
-  
-  if (isset($item_config->rows_content)) {
+
+  if (isset($item_config->rows_content) && !empty($item_config->rows_content)) {
     $rows_content = $item_config->rows_content;
     foreach ($rows_content as $key_row => $row) {
       $vars['row'][] = [
@@ -392,7 +404,8 @@ function template_preprocess_we_megamenu_submenu(&$vars) {
         '#trail' => $vars['trail'],
       ];
     }
-  } else {
+  }
+  else {
     $vars['row'] = [
       '#theme' => 'we_megamenu_row',
       '#items' => $vars['items'],
@@ -404,7 +417,7 @@ function template_preprocess_we_megamenu_submenu(&$vars) {
   }
 
   $submenu_config = isset($item_config->submenu_config) ? $item_config->submenu_config : [];
-  
+
   $vars['attributes'] = new Attribute();
   $vars['attributes']['class'] = [];
   $vars['attributes']['class'][] = 'we-mega-menu-submenu';
@@ -416,11 +429,13 @@ function template_preprocess_we_megamenu_submenu(&$vars) {
 }
 
 /**
- * Prepare variables for we_megamenu_row
+ * Prepare variables for we_megamenu_row.
  *
  * @param array $vars variables are declared in theme.
+ * @param array $vars
+ *   Variables are declared in theme.
  */
-function template_preprocess_we_megamenu_row(&$vars) {
+function template_preprocess_we_megamenu_row(array &$vars) {
   $vars['attributes'] = new Attribute();
   $vars['attributes']['class'] = [];
   $vars['attributes']['class'][] = 'we-mega-menu-row';
@@ -439,7 +454,8 @@ function template_preprocess_we_megamenu_row(&$vars) {
       ];
       $vars['attributes']['data-custom-row'] = isset(reset($col->col_content)->mlid) ? 0 : 1;
     }
-  } else {
+  }
+  else {
     $vars['col'] = [
       '#theme' => 'we_megamenu_col',
       '#items' => $vars['items'],
@@ -452,11 +468,12 @@ function template_preprocess_we_megamenu_row(&$vars) {
 }
 
 /**
- * Prepare variables for we_megamenu_col
+ * Prepare variables for we_megamenu_col.
  *
- * @param array $vars variables are declared in theme.
+ * @param array $vars
+ *   Variables are declared in theme.
  */
-function template_preprocess_we_megamenu_col(&$vars) {
+function template_preprocess_we_megamenu_col(array &$vars) {
   $vars['attributes'] = new Attribute();
   $vars['attributes']['class'] = [];
   $vars['attributes']['class'][] = 'we-mega-menu-col';
@@ -500,7 +517,8 @@ function template_preprocess_we_megamenu_col(&$vars) {
     $vars['attributes']['data-hidewhencollapse'] = isset($col_config->hidewhencollapse) ? $col_config->hidewhencollapse : '0';
     $vars['attributes']['data-class'] = isset($col_config->class) ? $col_config->class : '';
     $vars['attributes']['data-blocktitle'] = isset($col_config->block_title) ? $col_config->block_title : '';
-  } else {
+  }
+  else {
     $vars['subul'] = [
       '#theme' => 'we_megamenu_subul',
       '#items' => $vars['items'],
@@ -512,13 +530,14 @@ function template_preprocess_we_megamenu_col(&$vars) {
 }
 
 /**
- * Prepare variables for we_megamenu_subul
+ * Prepare variables for we_megamenu_subul.
  *
- * @param array $vars variables are declared in theme.
+ * @param array $vars
+ *   Variables are declared in theme.
  */
-function template_preprocess_we_megamenu_subul(&$vars) {
+function template_preprocess_we_megamenu_subul(array &$vars) {
   if ($vars['item_config']) {
-    foreach ($vars['items'] as $key_li => $li) {      
+    foreach ($vars['items'] as $key_li => $li) {
       $derivativeId = $li['derivativeId'];
       foreach ($vars['item_config'] as $key_item => $item) {
         if (isset($item->mlid)) {
@@ -537,7 +556,8 @@ function template_preprocess_we_megamenu_subul(&$vars) {
         }
       }
     }
-  } else {
+  }
+  else {
     foreach ($vars['items'] as $key_li => $li) {
       $vars['lis'][] = [
         '#theme' => ['we_megamenu_li'],
@@ -554,69 +574,212 @@ function template_preprocess_we_megamenu_subul(&$vars) {
 }
 
 /**
- * Prepare variables for we_megamenu_block
+ * Prepare variables for we_megamenu_block.
  *
- * @param array $vars variables are declared in theme.
+ * @param array $vars
+ *   Variables are declared in theme.
  */
-function template_preprocess_we_megamenu_block(&$vars) {
+function template_preprocess_we_megamenu_block(array &$vars) {
   $vars['block_content'] = $vars['block_content'];
 }
 
 /**
  * Implements hook_block_view_BASE_BLOCK_ID_alter().
  *
- * Config Contextual link of WeebPal Mega Menu blocks
+ * Config Contextual link of WeebPal Mega Menu blocks.
  */
-function we_megamenu_block_view_we_megamenu_block_alter(array &$build, \Drupal\Core\Block\BlockPluginInterface $block) {
-  // Add contextual links for system menu blocks.
+function we_megamenu_block_view_we_megamenu_block_alter(array &$build, BlockPluginInterface $block) {
   $menus = menu_list_system_menus();
   $menu_name = $block->getDerivativeId();
   if (isset($menus[$menu_name])) {
     $build['#contextual_links']['menu'] = [
       'route_parameters' => [
-        'menu' => $menu_name
+        'menu' => $menu_name,
       ],
     ];
   }
 
   $build['#contextual_links']['we_megamenu_block']['route_parameters'] = [
-    'menu_name' => $build['#derivative_plugin_id']
+    'menu_name' => $build['#derivative_plugin_id'],
   ];
+}
+
+function object_to_array($obj) {
+    if(is_object($obj)) $obj = (array) $obj;
+    if(is_array($obj)) {
+      $new = array();
+      foreach($obj as $key => $val) {
+          $new[$key] = object_to_array($val);
+      }
+    }
+    else $new = $obj;
+    return $new;       
+}
+
+/**
+ * Implements hook_entity_insert().
+ *
+ * Reset menu to default status when origin menu changed.
+ */
+function we_megamenu_entity_insert(Drupal\Core\Entity\EntityInterface $entity) {
+  if (method_exists($entity, 'getTypedData') && method_exists($entity, 'getEntityTypeId')) {
+    $data = $entity->getTypedData();
+    $data = $data->toArray();
+    $entity_type = $entity->getEntityTypeId();
+
+    switch ($entity_type) {
+      case 'menu':
+        
+        break;
+      
+      case 'menu_link_content':
+        if (isset($data['parent'][0]['value'])) {
+          $mid_parent = $data['parent'][0]['value'];
+          $mid_parent = str_replace('menu_link_content:', '', $mid_parent);
+          $menu_name = $data['menu_name'][0]['value'];
+          $config = \Drupal::config('system.theme');    
+          $theme_name = $config->get('default');
+          # Load main menu and insert to megamenu
+          $menu_item_obj = new stdClass();
+          $menu_item_obj->rows_content = [];
+          $menu_item_obj->submenu_config = new stdClass();
+          $menu_item_obj->submenu_config->width = '';
+          $menu_item_obj->submenu_config->height = '';
+          $menu_item_obj->submenu_config->type = '';
+          $menu_item_obj->item_config = new stdClass();
+          $menu_item_obj->item_config->level = 0;
+          $menu_item_obj->item_config->type = '';
+          $menu_item_obj->item_config->id = $entity->get('uuid')->getString();
+          $menu_item_obj->item_config->submenu = '';
+          $menu_item_obj->item_config->hide_sub_when_collapse = '';
+          $menu_item_obj->item_config->group = '';
+          $menu_item_obj->item_config->class = '';
+          $menu_item_obj->item_config->{'data-icon'} = '';
+          $menu_item_obj->item_config->{'data-caption'} = '';
+          $menu_item_obj->item_config->{'data-alignsub'} = '';
+
+          # Mega menu config
+          $menu_config = WeMegaMenuBuilder::loadConfig($menu_name, $theme_name);
+          foreach ($menu_config->menu_config as $key_menu => $menu) {
+            $mid_parent = ($mid_parent == 'standard.front_page') ? base_path() : $mid_parent;
+            if ($key_menu == $mid_parent) {
+              $rows_content = $menu->rows_content;
+
+              $tmp_col_content = new stdClass();
+              $tmp_col_content->mlid = $entity->get('uuid')->getString();
+              $tmp_col_content->type = 'we-mega-menu-li';
+              $tmp_col_content->item_config = new stdClass();
+
+              $tmp_col_cfg = new stdClass();
+              $tmp_col_cfg->hidewhencollapse = '';
+              $tmp_col_cfg->type = 'we-mega-menu-col';
+              $tmp_col_cfg->width = 12;
+              $tmp_col_cfg->block = '';
+              $tmp_col_cfg->class = '';
+              $tmp_col_cfg->block_title = 0;
+
+              $child_item = [
+                'col_content' =>$tmp_col_content,
+                'col_cfg' =>$tmp_col_cfg,
+              ];
+              
+              $menu_position = WeMegaMenuBuilder::menuItemInsert($key_menu, $menu_config, $menu, $child_item);
+            }
+          }
+
+          $menu_config->menu_config->{$entity->get('uuid')->getString()} = $menu_item_obj;
+          $data_cfg = json_encode($menu_config);
+          WeMegaMenuBuilder::saveConfig($menu_name, $theme_name, $data_cfg);
+        }
+        break;
+    }
+  }
+}
+
+function we_megamenu_entity_delete(Drupal\Core\Entity\EntityInterface $entity) {
+  if (method_exists($entity, 'getTypedData') && method_exists($entity, 'getEntityTypeId')) {
+    $data = $entity->getTypedData();
+    $data = $data->toArray();
+    $entity_type = $entity->getEntityTypeId();
+    
+
+    switch ($entity_type) {
+      case 'menu':
+      
+        break;
+      
+      case 'menu_link_content':
+        $menu_name = $data['menu_name'][0]['value'];
+        $config = \Drupal::config('system.theme');    
+        $theme_name = $config->get('default');
+        $menu_uuid = $entity->get('uuid')->getString();
+        $menu_uuid = ($menu_uuid == 'standard.front_page') ? base_path() : $menu_uuid;
+        $menu_config = WeMegaMenuBuilder::loadConfig($menu_name, $theme_name);
+        WeMegaMenuBuilder::menuItemDelete($menu_config, $menu_uuid);
+        WeMegaMenuBuilder::saveConfig($menu_name, $theme_name, json_encode($menu_config));
+        break;
+    }
+  }
 }
 
 /**
  * Implements hook_entity_presave().
  *
- * Reset menu to default status when origin menu changed
+ * Reset menu to default status when origin menu changed.
  */
-function we_megamenu_entity_presave(Drupal\Core\Entity\EntityInterface $entity) {
-  // if (method_exists($entity, 'getTypedData') && method_exists($entity, 'getEntityTypeId')) {
-  //   $data = $entity->getTypedData();
-  //   $data = $data->toArray();
-  //   $entity_type = $entity->getEntityTypeId();
-  //   $menu_name = FALSE;
-  //   switch ($entity_type) {
-  //     case 'menu':
-  //       $menu_name = $data['id'];
-  //       break;
-      
-  //     case 'menu_link_content':
-  //       $menu_name = isset($data['menu_name'][0]['value']) ? $data['menu_name'][0]['value'] : FALSE;
-  //       break;
-  //   }
+function we_megamenu_entity_presave(EntityInterface $entity) {
+  if (method_exists($entity, 'getTypedData') && method_exists($entity, 'getEntityTypeId')) {
+    $data = $entity->getTypedData();
+    $data = $data->toArray();
+    $entity_type = $entity->getEntityTypeId();
+    switch ($entity_type) {
+      case 'menu':
+        $menu_name = $data['id'];
+        $config = \Drupal::config('system.theme');    
+        $theme_name = $config->get('default');
+        
+        $tmp_col_content = new stdClass();
+        $tmp_col_content->mlid = '';
+        $tmp_col_content->type = 'we-mega-menu-li';
+        $tmp_col_content->item_config = new stdClass();
 
-  //   if ($menu_name) {
-  //     $query = \Drupal::database()->delete('we_megamenu');
-  //     $query->condition('menu_name', $menu_name);
-  //     $result = $query->execute();    
-  //   }
-  // }
+        $tmp_col_cfg = new stdClass();
+        $tmp_col_cfg->hidewhencollapse = '';
+        $tmp_col_cfg->type = 'we-mega-menu-col';
+        $tmp_col_cfg->width = 12;
+        $tmp_col_cfg->block = '';
+        $tmp_col_cfg->class = '';
+        $tmp_col_cfg->block_title = 0;
+
+        $child_item = [
+          'col_content' => $tmp_col_content,
+          'col_cfg' => $tmp_col_cfg,
+        ];
+
+        $menu_config = WeMegaMenuBuilder::loadConfig($menu_name, $theme_name);
+        WeMegaMenuBuilder::dragDropMenuItems($menu_name, $theme_name, $menu_config, $child_item);
+        WeMegaMenuBuilder::orderMenuItems($menu_config);
+        WeMegaMenuBuilder::saveConfig($menu_name, $theme_name, json_encode($menu_config));
+        break;
+      
+      case 'menu_link_content':
+        
+        break;
+    }
+  }
 }
 
+/**
+ * Function we_megamenu_preprocess_html.
+ */
 function we_megamenu_preprocess_html(&$vars) {
   $current_path = \Drupal::service('path.current')->getPath();
   $need_path = 'admin/structure/we-mega-menu/';
-  if (strpos($current_path, $need_path) !== false) {
+  if (strpos($current_path, $need_path) !== FALSE) {
     $vars['attributes']['class'][] = 'we-mega-menu-backend';
-  }  
+    $backend_style = \Drupal::state()->get('we_megamenu_backend_style') ?: '';
+    if (!empty($backend_style)) {
+      $vars['attributes']['class'][] = $backend_style;
+    }
+  }
 }

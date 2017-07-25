@@ -1,24 +1,26 @@
 <?php
+
 namespace Drupal\we_megamenu\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Url;
-use Drupal\Core\Link;
-use Drupal\Core\Menu\MenuTreeParameters;
 use Drupal\we_megamenu\WeMegaMenuBuilder;
-use Drupal\block\Controller\BlockListController;
 
 /**
  * Controller routines for block example routes.
  */
 class WeMegaMenuAdminController extends ControllerBase {
   /**
-   * A function build page backend
+   * A function build page backend.
+   *
    * @param string $menu_name
-   * @return string [markup]
+   *   Public function configWeMegaMenu menu_name.
+   *
+   * @return string[markup]
+   *   Public fucntion configWeMegaMenu string.
    */
   public function configWeMegaMenu($menu_name) {
-    $tree = WeMegaMenuBuilder::get_menu_tree_order($menu_name);
+    $tree = WeMegaMenuBuilder::getMenuTreeOrder($menu_name);
 
     $build = [];
     $build['we_megamenu'] = [
@@ -40,36 +42,27 @@ class WeMegaMenuAdminController extends ControllerBase {
   }
 
   /**
-   * A function ajax save menu config
+   * A function ajax save menu config.
    */
-  
   public function saveConfigWeMegaMenu() {
     if (isset($_POST['action']) && $_POST['action'] == 'save') {
-      $data_config = json_encode($_POST['data_config']);
+      $data_config = $_POST['data_config'];
       $theme = $_POST['theme'];
       $menu_name = $_POST['menu_name'];
-      $result = \Drupal::service('database')
-            ->merge('we_megamenu')
-            ->key([
-              'menu_name' => $menu_name,
-              'theme' => $theme
-            ])
-            ->fields([
-              'data_config' => $data_config,
-            ])->execute();
+      WeMegaMenuBuilder::saveConfig($menu_name, $theme, $data_config);
     }
     exit;
   }
 
   /**
-   * A function reset menu config
-   * @return string [markup]
+   * A function reset menu config.
    */
   public function resetConfigWeMegaMenu() {
     if (isset($_POST['action']) && $_POST['action'] == 'reset' && isset($_POST['menu_name']) && isset($_POST['theme'])) {
-      $theme_array = WeMegaMenuBuilder::render_we_megamenu_block($_POST['menu_name'], $_POST['theme']);
-      $markup = render($theme_array); 
-      echo $markup; exit;
+      $theme_array = WeMegaMenuBuilder::renderWeMegaMenuBlock($_POST['menu_name'], $_POST['theme']);
+      $markup = render($theme_array);
+      echo $markup;
+      exit;
     }
 
     if (isset($_POST['action']) && $_POST['action'] == 'reset-to-default' && isset($_POST['menu_name']) && isset($_POST['theme'])) {
@@ -77,35 +70,43 @@ class WeMegaMenuAdminController extends ControllerBase {
       $query->condition('menu_name', $_POST['menu_name']);
       $query->condition('theme', $_POST['theme']);
       $result = $query->execute();
-      $theme_array = WeMegaMenuBuilder::render_we_megamenu_block($_POST['menu_name'], $_POST['theme']);
-      $markup = render($theme_array); 
-      echo $markup; exit;
+      $theme_array = WeMegaMenuBuilder::renderWeMegaMenuBlock($_POST['menu_name'], $_POST['theme']);
+      $markup = render($theme_array);
+      echo $markup;
       exit;
     }
     exit;
   }
 
   /**
-   * Render block from post variable ajax
-   * @param string $menu_name
-   * @return string [markup]
+   * A function set style backend.
+   */
+  public function styleOfBackendWeMegaMenu() {
+    if (isset($_POST['type'])) {
+      \Drupal::state()->set('we_megamenu_backend_style', $_POST['type']);
+    }
+    exit;
+  }
+
+  /**
+   * Render block from post variable ajax.
    */
   public function renderBlock() {
     $title = TRUE;
     if ($_POST['title'] == 0) {
       $title = FALSE;
     }
-    
+
     if (isset($_POST['bid']) && isset($_POST['section']) && !empty($_POST['bid'])) {
       echo WeMegaMenuBuilder::renderBlock($_POST['bid'], $title, isset($_POST['section']));
     } else {
-      echo "";
+      echo '';
     }
     exit;
   }
 
   /**
-   * Render page list menu backend
+   * Render page list menu backend.
    */
   public function listWeMegaMenus() {
     $menus = menu_ui_get_menus();
@@ -113,7 +114,7 @@ class WeMegaMenuAdminController extends ControllerBase {
     foreach ($menus as $name => $title) {
       $row = [
         'menu-name' => $name,
-        'menu-title' => $title
+        'menu-title' => $title,
       ];
 
       $dropbuttons = [
@@ -121,22 +122,21 @@ class WeMegaMenuAdminController extends ControllerBase {
         '#links' => [
           'config' => [
             'url' => new Url('we_megamenu.admin.configure', ['menu_name' => $name]),
-            'title' => 'Config'
+            'title' => 'Config',
           ],
           'edit' => [
             'url' => new Url('entity.menu.edit_form', ['menu' => $name]),
-            'title' => 'Edit links'
+            'title' => 'Edit links',
           ],
         ],
       ];
       $row['menu-operations'] = ['data' => $dropbuttons];
       $rows[] = $row;
     }
-    // Prepare label for headers.
     $header = [
       'menu-machine-name' => t('Machine Name'),
       'menu-name' => t('Menu Name'),
-      'menu-options' => t('Options')
+      'menu-options' => t('Options'),
     ];
 
     return [
@@ -149,11 +149,11 @@ class WeMegaMenuAdminController extends ControllerBase {
   }
 
   /**
-   * Render list icon font awesome
+   * Render list icon font awesome.
    */
   public function getIcons() {
     $file = DRUPAL_ROOT . '/' . drupal_get_path('module', 'we_megamenu') . '/assets/resources/icon.wemegamenu';
-    $fh = fopen($file,'r');
+    $fh = fopen($file, 'r');
     $result = [];
     while ($line = fgets($fh)) {
       $result[] = trim($line);

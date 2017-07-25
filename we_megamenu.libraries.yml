@@ -3,7 +3,6 @@ form.we-mega-menu-backend:
   css:
     theme:
       assets/includes/bootstrap/css/bootstrap.min.css: {}
-      assets/includes/fontawesome/css/font-awesome.css: {}
       assets/includes/jquery-ui.css: {}
       assets/includes/animate.css: {}
       assets/includes/chosen/chosen.css: {}
@@ -25,9 +24,9 @@ form.we-mega-menu-frontend:
   css:
     theme:
       assets/includes/bootstrap/css/bootstrap.min.css: {}
-      assets/includes/fontawesome/css/font-awesome.css: {}
       assets/css/we_megamenu_backend.css: {}
   js:
+    assets/js/we_mobile_menu.js: {}
     assets/js/we_megamenu_frontend.js: {}
   dependencies:
     - core/jquery

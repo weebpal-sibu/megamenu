@@ -1,8 +1,4 @@
 <?php
-/**
- * @file
- * Contains \Drupal\we_megamenu\Plugin\Derivative\WeMegaMenuBlock.
- */
 
 namespace Drupal\we_megamenu\Plugin\Derivative;
 
@@ -11,8 +7,7 @@ use Drupal\Component\Plugin\Derivative\DeriverBase;
 /**
  * Provides blocks which belong to WeebPal Mega Menu.
  */
-class WeMegaMenuBlock extends DeriverBase {
-  
+class WeMegaMenuBlock extends DeriverBase {  
   /**
    * {@inheritdoc}
    */

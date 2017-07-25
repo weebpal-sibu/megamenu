@@ -29,7 +29,7 @@ we_megamenu.admin.configure:
     _controller: '\Drupal\we_megamenu\Controller\WeMegaMenuAdminController::configWeMegaMenu'
   requirements:
     _permission: 'administer we_megamenu'
-
+    
 we_megamenu.admin.save:
   path: '/admin/structure/we-mega-menu/save'
   defaults:
@@ -43,5 +43,13 @@ we_megamenu.admin.reset:
   defaults:
     _title: 'Save Configuration WeebPal Mega Menu'
     _controller: '\Drupal\we_megamenu\Controller\WeMegaMenuAdminController::resetConfigWeMegaMenu'
+  requirements:
+    _permission: 'administer we_megamenu'
+
+we_megamenu.admin.style:
+  path: '/admin/structure/we-mega-menu/style'
+  defaults:
+    _title: 'Style Of Backend WeebPal Mega Menu'
+    _controller: '\Drupal\we_megamenu\Controller\WeMegaMenuAdminController::styleOfBackendWeMegaMenu'
   requirements:
     _permission: 'administer we_megamenu'

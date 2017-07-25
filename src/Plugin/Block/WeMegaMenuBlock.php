@@ -1,25 +1,8 @@
 <?php
-# Structure Of WeebPal Mega Menu
-// we-mega-menu.html.twig
-//     we-mega-menu-ul.html.
-//         we-mega-menu-li.html.twig
-//             we-mega-menu-submenu.html.twig
-//                 we-mega-menu-row.html.twig
-//                     we-mega-menu-col.html.twig
-//                         we-mega-menu-ul.html.twig
-//                             ...
-//                     we-mega-menu-col.html.twig
-//                         we-mega-menu-ul.html.twig
-//                             ...
-//                     we-mega-menu-col.html.twig
-//                         we-mega-menu-block.html.twig
-//                         we-mega-menu-block.html.twig
 
 namespace Drupal\we_megamenu\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
-use Drupal\Core\Menu;
-use Drupal\Core\Menu\MenuTreeParameters;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\we_megamenu\WeMegaMenuBuilder;
 
@@ -46,8 +29,8 @@ class WeMegaMenuBlock extends BlockBase {
       '#block_theme' => \Drupal::config('system.theme')->get('default'),
       '#attached' => [
         'library' => [
-          'we_megamenu/form.we-mega-menu-frontend'
-        ]
+          'we_megamenu/form.we-mega-menu-frontend',
+        ],
       ],
       '#cache' => [
         'max-age' => 0,
@@ -64,12 +47,16 @@ class WeMegaMenuBlock extends BlockBase {
   }
 
   /**
-   *  Default cache is disabled. 
+   * Default cache is disabled. 
    * 
    * @param array $form
+   *   Public function buildConfigurationForm array form.
    * @param \Drupal\we_megamenu\Plugin\Block\FormStateInterface $form_state
-   * @return 
-   */
+   *   Public function buildConfigurationForm form_state.
+   *
+   * @return int
+   *   Public function buildConfigurationForm int.
+  */
   public function buildConfigurationForm(array $form, FormStateInterface $form_state) {
     $rebuild_form = parent::buildConfigurationForm($form, $form_state);
     $rebuild_form['cache']['max_age']['#default_value'] = 0;

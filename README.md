@@ -1,7 +1,6 @@
 WEEBPAL MEGA MENU
 -----------
-This powerful Drupal module helps you create custom menu, video and Drupal Blocks 
-
+This powerful Drupal module helps you create custom menu, video and Drupal blocks
 
 BACKEND DEVELOPER
 -----------------
