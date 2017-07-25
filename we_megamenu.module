@@ -604,18 +604,6 @@ function we_megamenu_block_view_we_megamenu_block_alter(array &$build, BlockPlug
   ];
 }
 
-function object_to_array($obj) {
-    if(is_object($obj)) $obj = (array) $obj;
-    if(is_array($obj)) {
-      $new = array();
-      foreach($obj as $key => $val) {
-          $new[$key] = object_to_array($val);
-      }
-    }
-    else $new = $obj;
-    return $new;       
-}
-
 /**
  * Implements hook_entity_insert().
  *
@@ -696,6 +684,9 @@ function we_megamenu_entity_insert(Drupal\Core\Entity\EntityInterface $entity) {
   }
 }
 
+/**
+ * Implements hook_entity_delete().
+ */
 function we_megamenu_entity_delete(Drupal\Core\Entity\EntityInterface $entity) {
   if (method_exists($entity, 'getTypedData') && method_exists($entity, 'getEntityTypeId')) {
     $data = $entity->getTypedData();
