@@ -5,7 +5,7 @@ namespace Drupal\we_megamenu\Plugin\Derivative;
 use Drupal\Component\Plugin\Derivative\DeriverBase;
 
 /**
- * Provides blocks which belong to WeebPal Mega Menu.
+ * Provides blocks which belong to Drupal 8 Mega Menu.
  */
 class WeMegaMenuBlock extends DeriverBase {  
   /**

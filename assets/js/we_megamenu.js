@@ -182,14 +182,6 @@ Drupal.WeMegaMenu = Drupal.WeMegaMenu || {};
       }
     }
 
-    // if (self.currentSelected.hasAttr('hide-sub-when-collapse')) {
-    //   if (self.currentSelected.attr('hide-sub-when-collapse') == 0) {
-    //     self.toolbar.find('.hide-sub-when-collapse').prop('checked', false);
-    //   } else {
-    //     self.toolbar.find('.hide-sub-when-collapse').prop('checked', true);
-    //   }
-    // }
-
     if (self.currentSelected.hasClass('we-mega-menu-li')) {
       var level = self.currentSelected.attr('data-level');
       if (level == 0) {
@@ -652,10 +644,8 @@ Drupal.WeMegaMenu = Drupal.WeMegaMenu || {};
             }
             
 
-            // // Rebuild event click
-            // Drupal.WeMegaMenu.click();
-            // Drupal.WeMegaMenu.calcColWidthLayout(curCol.closest('.we-mega-menu-row'));
-            // self.currentSelected.trigger('click');
+            // Rebuild event click
+            Drupal.WeMegaMenu.click();
             break;
 
           case 'right':
@@ -681,10 +671,8 @@ Drupal.WeMegaMenu = Drupal.WeMegaMenu || {};
                 }
 
                 if (typeof next.find('ul') != 'undefined' && next.find('ul').length > 0) {
-                  // alert(1);
                   next.find('ul').prepend(html);
                 } else {
-                  // alert(11);
                   next.prepend('<ul class="nav nav-tabs subul">' + html + '</ul>');  
                 }
               } else {
@@ -693,10 +681,8 @@ Drupal.WeMegaMenu = Drupal.WeMegaMenu || {};
             }
             
 
-            // // Rebuild event click
-            // Drupal.WeMegaMenu.click();
-            // Drupal.WeMegaMenu.calcColWidthLayout(curCol.closest('.we-mega-menu-row'));
-            // self.currentSelected.trigger('click');
+            // Rebuild event click
+            Drupal.WeMegaMenu.click();
             break;
         }
 
@@ -713,7 +699,6 @@ Drupal.WeMegaMenu = Drupal.WeMegaMenu || {};
     if (row_counter > 12) {
       $.notify({
         icon: 'glyphicon glyphicon-ok-sign',
-        // title: 'WeebPal Mega Menu Notify',
         message: 'Limit maximum 12 columns',
         target: '_blank'
       },{
@@ -755,7 +740,6 @@ Drupal.WeMegaMenu = Drupal.WeMegaMenu || {};
       }
 
       $(row).children('.we-mega-menu-col').attr('class', $(row).children('.we-mega-menu-col').attr('class').replace(/\bspan.*?\b/g, ''));
-      // $(row).children('.we-mega-menu-col').addClass('span' + unit);
       var class_data = $(row).children('.we-mega-menu-col').attr('class');
       $(row).children('.we-mega-menu-col').attr('class', class_data.replace(/  +/g, ' '));
       $(row).children('.we-mega-menu-col').find('li').removeClass('open');
@@ -885,7 +869,6 @@ Drupal.WeMegaMenu = Drupal.WeMegaMenu || {};
         complete: function(msg) {
           $.notify({
             icon: 'glyphicon glyphicon-ok-sign',
-            // title: 'WeebPal Mega Menu Notify',
             message: 'Save config completed',
             url: 'http://weebpal.com',
             target: '_blank'
@@ -947,7 +930,6 @@ Drupal.WeMegaMenu = Drupal.WeMegaMenu || {};
           Drupal.WeMegaMenu.click();
           $.notify({
             icon: 'glyphicon glyphicon-ok-sign',
-            // title: 'WeebPal Mega Menu Notify',
             message: 'Reset menu config completed',
             url: 'http://weebpal.com',
             target: '_blank'
@@ -1008,7 +990,6 @@ Drupal.WeMegaMenu = Drupal.WeMegaMenu || {};
           Drupal.WeMegaMenu.click();
           $.notify({
             icon: 'glyphicon glyphicon-ok-sign',
-            // title: 'WeebPal Mega Menu Notify',
             message: 'Reset menu config completed',
             url: 'http://weebpal.com',
             target: '_blank'

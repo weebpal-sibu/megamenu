@@ -247,7 +247,7 @@ class WeMegaMenuBuilder {
   }
 
   /**
-   * Render WeebPal Mega Menu blocks.
+   * Render Drupal 8 Mega Menu blocks.
    *
    * @param string $menu_name
    *   Public static function renderWeMegaMenuBlock menu_name.
@@ -268,7 +268,7 @@ class WeMegaMenuBuilder {
   }
 
   /**
-   * Load config WeebPal Mega Menu.
+   * Load config Drupal 8 Mega Menu.
    *
    * @param string $menu_name
    *   Public static function loadConfig menu_name.
@@ -292,7 +292,7 @@ class WeMegaMenuBuilder {
   }
 
   /**
-   * Save config WeebPal Mega Menu.
+   * Save config Drupal 8 Mega Menu.
    *
    * @param string $menu_name
    *   Public static function saveConfig menu_name.

@@ -2,7 +2,7 @@
 
 /**
  * @file
- * WeebPal Mega Menu Module.
+ * Drupal 8 Mega Menu Module.
  */
 
 use Drupal\Core\Entity\EntityInterface;
@@ -586,7 +586,7 @@ function template_preprocess_we_megamenu_block(array &$vars) {
 /**
  * Implements hook_block_view_BASE_BLOCK_ID_alter().
  *
- * Config Contextual link of WeebPal Mega Menu blocks.
+ * Config Contextual link of Drupal 8 Mega Menu blocks.
  */
 function we_megamenu_block_view_we_megamenu_block_alter(array &$build, BlockPluginInterface $block) {
   $menus = menu_list_system_menus();

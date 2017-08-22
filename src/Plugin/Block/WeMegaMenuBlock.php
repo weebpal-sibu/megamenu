@@ -7,12 +7,12 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\we_megamenu\WeMegaMenuBuilder;
 
 /**
- * Provides a 'WeebPal Mega Menu' Block.
+ * Provides a 'Drupal 8 Mega Menu' Block.
  *
  * @Block(
  *   id = "we_megamenu_block",
- *   admin_label = @Translation("WeebPal Mega Menu"),
- *   category = @Translation("WeebPal Mega Menu"),
+ *   admin_label = @Translation("Drupal 8 Mega Menu"),
+ *   category = @Translation("Drupal 8 Mega Menu"),
  *   deriver = "Drupal\we_megamenu\Plugin\Derivative\WeMegaMenuBlock",
  * )
  */

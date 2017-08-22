@@ -15,15 +15,7 @@
       $(settings.targetWrapper).addClass('mobile-main-menu');
     }
 
-    var wrapper = $(settings.pageSelector);
-    if (!wrapper.find('.btn-close').length) {
-      var btnClose = $('<span class="btn-close"></span>');
-      btnClose.prependTo(wrapper);
-      $('.btn-close').on('click', function(e) {
-        toggleButton.trigger('click');
-        return false;
-      });
-    }
+    var toggleButton = $(this.selector);
 
     $(window).resize(function() {
       if ($(window).width() <= 991) {
@@ -41,7 +33,6 @@
       }
     });
 
-    var toggleButton = this;
     this.off('click.mobileMenu');
     this.on('click.mobileMenu', function(e) {
       var wrapper = $(settings.pageSelector);
@@ -79,6 +70,7 @@
         wrapper.removeClass(settings.toggledClass);
 
         if (overlay.length > 0) {
+          wrapper.find('.btn-close').remove();
           overlay.remove();
           $('html, body').css('overflow', '');
           $('html, body').css('height', '');

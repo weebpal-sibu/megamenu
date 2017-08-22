@@ -143,7 +143,7 @@ class WeMegaMenuAdminController extends ControllerBase {
       '#theme' => 'table',
       '#header' => $header,
       '#rows' => $rows,
-      '#empty' => t('No WeebPal Mega Menu block available. <a href="@link">Add Menu</a>.', ['@link' => \Drupal::url('entity.menu.add_form')]),
+      '#empty' => t('No Drupal 8 Mega Menu block available. <a href="@link">Add Menu</a>.', ['@link' => \Drupal::url('entity.menu.add_form')]),
       '#attributes' => ['id' => 'we_megamenu'],
     ];
   }

@@ -25,7 +25,7 @@ we_megamenu.geticons:
 we_megamenu.admin.configure:
   path: '/admin/structure/we-mega-menu/{menu_name}/config'
   defaults:
-    _title: 'Config WeebPal Mega Menu'
+    _title: 'Config Drupal 8 Mega Menu'
     _controller: '\Drupal\we_megamenu\Controller\WeMegaMenuAdminController::configWeMegaMenu'
   requirements:
     _permission: 'administer we_megamenu'
@@ -33,7 +33,7 @@ we_megamenu.admin.configure:
 we_megamenu.admin.save:
   path: '/admin/structure/we-mega-menu/save'
   defaults:
-    _title: 'Save Configuration WeebPal Mega Menu'
+    _title: 'Save Configuration Drupal 8 Mega Menu'
     _controller: '\Drupal\we_megamenu\Controller\WeMegaMenuAdminController::saveConfigWeMegaMenu'
   requirements:
     _permission: 'administer we_megamenu'
@@ -41,7 +41,7 @@ we_megamenu.admin.save:
 we_megamenu.admin.reset:
   path: '/admin/structure/we-mega-menu/reset'
   defaults:
-    _title: 'Save Configuration WeebPal Mega Menu'
+    _title: 'Save Configuration Drupal 8 Mega Menu'
     _controller: '\Drupal\we_megamenu\Controller\WeMegaMenuAdminController::resetConfigWeMegaMenu'
   requirements:
     _permission: 'administer we_megamenu'
@@ -49,7 +49,7 @@ we_megamenu.admin.reset:
 we_megamenu.admin.style:
   path: '/admin/structure/we-mega-menu/style'
   defaults:
-    _title: 'Style Of Backend WeebPal Mega Menu'
+    _title: 'Style Of Backend Drupal 8 Mega Menu'
     _controller: '\Drupal\we_megamenu\Controller\WeMegaMenuAdminController::styleOfBackendWeMegaMenu'
   requirements:
     _permission: 'administer we_megamenu'
