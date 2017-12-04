@@ -4,10 +4,10 @@ Drupal.WeMegaMenuFrontEnd.megamenuActivated = false;
 
 (function ($, Drupal, drupalSettings) {
   "use strict";
-  
+
   Drupal.behaviors.kMegaMenuFrontEndAction = {
     attach: function (context) {
-      $(window).load(function() {
+      $(window).on('load', function() {
         Drupal.WeMegaMenuFrontEnd.init();
         Drupal.WeMegaMenuFrontEnd.mobileMenu();
       })

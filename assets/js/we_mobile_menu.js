@@ -15,7 +15,7 @@
       $(settings.targetWrapper).addClass('mobile-main-menu');
     }
 
-    var toggleButton = $(this.selector);
+    var toggleButton = this;
 
     $(window).resize(function() {
       if ($(window).width() <= 991) {
