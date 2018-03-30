@@ -57,7 +57,9 @@ Drupal.WeMegaMenuFrontEnd.megamenuActivated = false;
 
   Drupal.WeMegaMenuFrontEnd.mobileMenu = function() {
       $('#menu-toggle').mobileMenu({
-          targetWrapper: '.navbar-we-mega-menu',
+          pageSelector: 'body',
+          targetWrapper: '.navbar-we-mega-menu'
+
       });
   };
 })(jQuery, Drupal, drupalSettings);

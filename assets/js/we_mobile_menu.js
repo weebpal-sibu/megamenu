@@ -5,7 +5,6 @@
   $.fn.mobileMenu = function(options) {
 
     var settings = $.extend({
-      pageSelector: '#page',
       targetWrapper: '.navbar-we-mega-menu',
       accordionMenu: 'true',
       toggledClass : 'toggled'

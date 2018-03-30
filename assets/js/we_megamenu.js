@@ -165,6 +165,13 @@ Drupal.WeMegaMenu = Drupal.WeMegaMenu || {};
       $(self.toolbar).find('.we-mega-menu-txt-caption').val('');
     }
 
+    if (self.currentSelected.hasAttr('data-target')) {
+      var target = self.currentSelected.attr('data-target');
+      $(self.toolbar).find('select.we-mega-menu-cbx-target').val(target).trigger('chosen:updated');;
+    } else {
+      $(self.toolbar).find('select.we-mega-menu-cbx-target').val('_self').trigger('chosen:updated');;
+    }
+
     if (self.currentSelected.hasAttr('data-group')) {
       if (self.currentSelected.attr('data-group') == 0) {
         self.toolbar.find('.we-mega-menu-chx-group').prop('checked', false);
@@ -425,6 +432,19 @@ Drupal.WeMegaMenu = Drupal.WeMegaMenu || {};
       } else {
         self.currentSelected.removeAttr('data-caption');
         self.currentSelected.find('a span.we-mega-menu-caption').eq(0).remove();
+      }
+    });
+
+    $(self.toolbar).find('select.we-mega-menu-cbx-target').on('change', function() {
+      var target = $(this).val();
+      if (target.length) {
+        self.currentSelected.attr('data-target', target);
+        self.currentSelected.attr('target', target);
+        self.currentSelected.find('a.we-mega-menu-li').eq(0).attr('target', target);
+      } else {
+        self.currentSelected.attr('data-target', '_self');
+        self.currentSelected.attr('target', '_self');
+        self.currentSelected.find('a.we-mega-menu-li').eq(0).attr('target', '_self');
       }
     });
 
@@ -781,10 +801,10 @@ Drupal.WeMegaMenu = Drupal.WeMegaMenu || {};
         item_config['data-icon'] = typeof $this.attr('data-icon') != 'undefined' ? $this.attr('data-icon') : '';
         item_config['data-caption'] = typeof $this.attr('data-caption') != 'undefined' ? $this.attr('data-caption') : '';
         item_config['data-alignsub'] = typeof $this.attr('data-alignsub') != 'undefined' ? $this.attr('data-alignsub') : '';
-
+        item_config['data-target'] = typeof $this.attr('data-target') != 'undefined' ? $this.attr('data-target') : '';
         
         var $rows = $submenu.find('[class="we-mega-menu-row"]:first').parent().children('[class="we-mega-menu-row"]');
-        $rows.each(function(k, e) {
+        $rows.each(function(kk, ee) {
           var cols = [];
           var $cols = $(this).children('.we-mega-menu-col');
           $cols.each(function(k, e) {
@@ -886,8 +906,8 @@ Drupal.WeMegaMenu = Drupal.WeMegaMenu || {};
             offset: 300,
             spacing: 10,
             z_index: 1031,
-            delay: 200,
-            timer: 200,
+            delay: 300,
+            timer: 400,
             url_target: '_blank',
             mouse_over: null,
             animate: {

@@ -560,7 +560,7 @@ nav[data-animation = "Elastic"]{
 
 // 991
 @media (max-width: $tablet-ht - 1) {
-    #page {
+    body {
         padding-left: 0;
         right: 0;
         transition: all 0.5s ease-in-out;
@@ -570,7 +570,7 @@ nav[data-animation = "Elastic"]{
         position: relative;
         margin-right: 0;
     }
-    #page.toggled {
+    body.toggled {
         @include sizeRem(right, 250px);
         .btn-close {
             @include opacity(1);
@@ -653,7 +653,7 @@ nav[data-animation = "Elastic"]{
             }
         }
     }
-    #page.toggled .mobile-main-menu {
+    body.toggled .mobile-main-menu {
         right: 0;
         display: block;
     }

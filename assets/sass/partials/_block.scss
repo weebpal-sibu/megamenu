@@ -690,6 +690,21 @@
 				    text-decoration: none ;
 	    		}
 			}
+			> .we-megamenu-nolink{
+				text-align: left;
+				color: $black-color;
+				@include wp-font(font-bold);
+				@include sizeRem(font-size, 14px);
+				margin:0;
+	    		border: 1px solid $border-color;
+	    		@include sizeRemAll(padding, 9px, 45px, 9px, 15px);
+			    background: transparent;
+			    font-weight: bold;
+			    @include border-radius-rem(20px);
+			    @include transition(all .1s ease);
+			    @include display-flex;
+			    @include align-items(center);
+			}
 		}
 
 		> .we-mega-menu-li{
@@ -724,6 +739,7 @@
 			&.dropdown-menu{
 				&.open{
 					position: relative;
+					z-index: 25;
 					> .we-mega-menu-submenu {
 					  display: block;
 					}

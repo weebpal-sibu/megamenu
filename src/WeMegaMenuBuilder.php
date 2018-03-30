@@ -463,6 +463,10 @@ class WeMegaMenuBuilder {
             }
           }
 
+          if (!sizeof($positions)) {
+            continue;
+          }
+
           $list_menu_items = WeMegaMenuBuilder::sortMenu($list_menu_items);
           foreach ($positions as $key_position => $position) {
             $pos_params = explode('-', $position);
@@ -471,17 +475,22 @@ class WeMegaMenuBuilder {
             $size = $pos_params[2];
 
             if ($size >= 0) {
-              $list_item = array_slice($list_menu_items, 0, $size);            
-              $list_menu_items = array_diff_assoc($list_menu_items, $list_item);
-              $menu_config->menu_config->{$key_menu}->rows_content[$row][$col]->col_content = [];
-              foreach ($list_item as $key_menu_item => $menu_itemnew) {
-                foreach ($list_mega_menu_items as $key_mega_menu => $mega_menu_item) {
-                  if ($menu_itemnew['derivativeId'] == $mega_menu_item->mlid) {
-                    $menu_config->menu_config->{$key_menu}->rows_content[$row][$col]->col_content[] = $mega_menu_item;
-                    $items_validate_serialize = array_map("serialize", $menu_config->menu_config->{$key_menu}->rows_content[$row][$col]->col_content);
-                    $items_validate_unique = array_unique($items_validate_serialize);
-                    $items_validate = array_map("unserialize", $items_validate_unique);
-                    $menu_config->menu_config->{$key_menu}->rows_content[$row][$col]->col_content = $items_validate;
+              if (is_array($list_menu_items)) {
+                $list_item = array_slice($list_menu_items, 0, $size);
+                if (is_array($list_item)) {
+                  $list_menu_items = array_map('unserialize', array_diff_assoc(array_map('serialize', $list_menu_items), array_map('serialize', $list_item)));
+
+                  $menu_config->menu_config->{$key_menu}->rows_content[$row][$col]->col_content = [];
+                  foreach ($list_item as $key_menu_item => $menu_itemnew) {
+                    foreach ($list_mega_menu_items as $key_mega_menu => $mega_menu_item) {
+                      if ($menu_itemnew['derivativeId'] == $mega_menu_item->mlid) {
+                        $menu_config->menu_config->{$key_menu}->rows_content[$row][$col]->col_content[] = $mega_menu_item;
+                        $items_validate_serialize = array_map("serialize", $menu_config->menu_config->{$key_menu}->rows_content[$row][$col]->col_content);
+                        $items_validate_unique = array_unique($items_validate_serialize);
+                        $items_validate = array_map("unserialize", $items_validate_unique);
+                        $menu_config->menu_config->{$key_menu}->rows_content[$row][$col]->col_content = $items_validate;
+                      }
+                    }
                   }
                 }
               }
@@ -574,13 +583,13 @@ class WeMegaMenuBuilder {
             if ($key_menu == $uuid) {
               foreach ($childs as $key_child => $child_uuid) {
                 $tmp_col_content->mlid = $child_uuid;
-                $menu_config->menu_config->{$key_menu}->rows_content[$row_count][$col_count]->col_content[] = $tmp_col_content;
-                $items_validate_serialize = array_map("serialize", $menu_config->menu_config->{$key_menu}->rows_content[$row_count][$col_count]->col_content);
+                $menu_config->menu_config->{$key_menu}->rows_content[0][0]->col_content[] = $tmp_col_content;
+                $items_validate_serialize = array_map("serialize", $menu_config->menu_config->{$key_menu}->rows_content[0][0]->col_content);
                 $items_validate_unique = array_unique($items_validate_serialize);
                 $items_validate = array_map("unserialize", $items_validate_unique);
-                $menu_config->menu_config->{$key_menu}->rows_content[$row_count][$col_count]->col_content = $items_validate;
-                if (!isset($menu_config->menu_config->{$key_menu}->rows_content[$row_count][$col_count]->col_config)) {
-                  $menu_config->menu_config->{$key_menu}->rows_content[$row_count][$col_count]->col_config = $tmp_col_cfg;
+                $menu_config->menu_config->{$key_menu}->rows_content[0][0]->col_content = $items_validate;
+                if (!isset($menu_config->menu_config->{$key_menu}->rows_content[0][0]->col_config)) {
+                  $menu_config->menu_config->{$key_menu}->rows_content[0][0]->col_config = $tmp_col_cfg;
                 }
               }
             }

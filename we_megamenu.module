@@ -302,6 +302,7 @@ function template_preprocess_we_megamenu_li(&$vars) {
   $vars['attributes']['class'][] = count($vars['subtree']) ? 'dropdown-menu' : '';
   $vars['attributes']['data-level'] = $vars['item']['level'];
   $vars['attributes']['data-element-type'] = 'we-mega-menu-li';
+  $vars['attributes']['description'] = isset($vars['item']['description']) ? $vars['item']['description'] : '';
   $vars['href'] = '';
   if ($vars['item']['url'] == '<front>') {
     $vars['attributes']['data-id'] = 'home';
@@ -311,22 +312,6 @@ function template_preprocess_we_megamenu_li(&$vars) {
     $vars['attributes']['data-id'] = !empty($vars['item']['derivativeId']) ? $vars['item']['derivativeId'] : $vars['item']['url'];
     $vars['href'] = $vars['item']['url'];
   }
-  
-  // $current_user = \Drupal::currentUser();
-  // if (strpos($vars['href'], 'user/logout') !== FALSE) {
-  //   if ($current_user->id() == 0) {
-  //     return;
-  //   }
-  // }
-
-  // if (strpos($vars['href'], 'user/login') !== FALSE) {
-  //   if ($current_user->id() == 0) {
-  //     // is visitor.
-  //   }
-  //   else {
-  //     return;
-  //   }
-  // }
 
   $vars['attributes']['data-submenu'] = 0;
   $vars['attributes']['hide-sub-when-collapse'] = 0;
@@ -342,6 +327,7 @@ function template_preprocess_we_megamenu_li(&$vars) {
     $vars['attributes']['data-caption'] = !empty($item_config->item_config->{'data-caption'}) ? $item_config->item_config->{'data-caption'} : '';
     $vars['attributes']['hide-sub-when-collapse'] = !empty($item_config->item_config->{'hide_sub_when_collapse'}) ? $item_config->item_config->{'hide_sub_when_collapse'} : '';
     $vars['attributes']['data-alignsub'] = !empty($item_config->item_config->{'data-alignsub'}) ? $item_config->item_config->{'data-alignsub'} : '';
+    $vars['attributes']['data-target'] = !empty($item_config->item_config->{'data-target'}) ? $item_config->item_config->{'data-target'} : '';
   }
 
   $trail = $vars['trail'];
@@ -645,6 +631,7 @@ function we_megamenu_entity_insert(Drupal\Core\Entity\EntityInterface $entity) {
           $menu_item_obj->item_config->{'data-icon'} = '';
           $menu_item_obj->item_config->{'data-caption'} = '';
           $menu_item_obj->item_config->{'data-alignsub'} = '';
+          $menu_item_obj->item_config->{'data-target'} = '_self';
 
           # Mega menu config
           $menu_config = WeMegaMenuBuilder::loadConfig($menu_name, $theme_name);

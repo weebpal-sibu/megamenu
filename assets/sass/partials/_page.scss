@@ -284,6 +284,23 @@ body.we-mega-menu-backend{
 					border: 0 none;
 				}
 			}
+			> .we-megamenu-nolink{
+				background-color: #eff0f1;
+				border: 0 none;
+				@include border-radius(0);
+				margin-right: 0;
+				color: $body-color;
+				@include sizeRem(font-size, 13px);
+				@include wp-font(font-bold);
+				text-transform: uppercase;
+				@include sizeRemAll(padding, 18px, 25px, 18px, 25px);
+				&:before{
+					@include opacity(1);
+				}
+				&:after{
+					@include opacity(0);
+				}
+			}
 
 		}
 
