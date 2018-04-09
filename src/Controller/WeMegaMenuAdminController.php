@@ -17,7 +17,7 @@ class WeMegaMenuAdminController extends ControllerBase {
    *   Public function configWeMegaMenu menu_name.
    *
    * @return string[markup]
-   *   Public fucntion configWeMegaMenu string.
+   *   Public function configWeMegaMenu string.
    */
   public function configWeMegaMenu($menu_name) {
     $tree = WeMegaMenuBuilder::getMenuTreeOrder($menu_name);
