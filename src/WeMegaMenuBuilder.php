@@ -39,7 +39,7 @@ class WeMegaMenuBuilder {
           'plugin_id' => $item->link->getPluginId(),
         ];
       }
-    } 
+    }
     else {
       if ($items->hasChildren) {
         foreach ($items->subtree as $key_item => $item) {
@@ -115,8 +115,8 @@ class WeMegaMenuBuilder {
    *   Public static function sortMenu array.
    */
   public static function sortMenu($menu) {
-    for ($i = 0; $i < count($menu); $i++) { 
-      for ($j = $i + 1; $j < count($menu); $j++) { 
+    for ($i = 0; $i < count($menu); $i++) {
+      for ($j = $i + 1; $j < count($menu); $j++) {
         if ($menu[$i]['weight'] > $menu[$j]['weight']) {
           $menu_tmp = $menu[$i];
           $menu[$i] = $menu[$j];
@@ -227,21 +227,26 @@ class WeMegaMenuBuilder {
     $html = '';
     if ($bid && !empty($bid)) {
       $block = \Drupal\block\Entity\Block::load($bid);
-      $title = $block->label();
-      $block_content = \Drupal::entityManager()
-        ->getViewBuilder('block')
-        ->view($block);
+      if (isset($block) && !empty($block)) {
+        $title = $block->label();
+        $block_content = \Drupal::entityManager()
+          ->getViewBuilder('block')
+          ->view($block);
 
-      if ($section == 'admin') {
-        $html .= '<span class="close icon-remove" title="Remove this block">&nbsp;</span>';
+        if ($section == 'admin') {
+          $html .= '<span class="close icon-remove" title="Remove this block">&nbsp;</span>';
+        }
+
+        $html .= '<div class="type-of-block">';
+        $html .= '<div class="block-inner">';
+        $html .= $title_enable ? '<h2>' . $title . '</h2>' : '';
+        $html .= render($block_content);
+        $html .= '</div>';
+        $html .= '</div>';
       }
-
-      $html .= '<div class="type-of-block">';
-      $html .= '<div class="block-inner">';
-      $html .= $title_enable ? '<h2>' . $title . '</h2>' : '';
-      $html .= render($block_content);
-      $html .= '</div>';
-      $html .= '</div>';
+      else {
+        $html = '<p><b>Warning:</b> <i>Broken/Missing block</i></p>';
+      }
     }
     return $html;
   }
@@ -366,7 +371,7 @@ class WeMegaMenuBuilder {
           }
         }
       }
-      
+
       $menu_config->menu_config->{$key_menu}->rows_content[$row_count][$col_count]->col_content[] = $tmp_col_content;
       $items_validate_serialize = array_map("serialize", $menu_config->menu_config->{$key_menu}->rows_content[$row_count][$col_count]->col_content);
       $items_validate_unique = array_unique($items_validate_serialize);
@@ -500,7 +505,7 @@ class WeMegaMenuBuilder {
       }
     }
   }
-  
+
   /**
    * Drag-Drop menu item insert.
    *
@@ -513,7 +518,7 @@ class WeMegaMenuBuilder {
    * @param object $child_item
    *   Public static function menuItemInsert child_item.
    */
-  public static function dragDropMenuItems($menu_name, $theme_name = '', $menu_config, $child_item) { 
+  public static function dragDropMenuItems($menu_name, $theme_name = '', $menu_config, $child_item) {
     $list_menu_items = WeMegaMenuBuilder::getMenuItems($menu_name);
     $tmp_col_content = $child_item['col_content'];
     $tmp_col_cfg = $child_item['col_cfg'];
@@ -538,7 +543,7 @@ class WeMegaMenuBuilder {
                           if (isset($col->mlid)) {
                             $row_count = $key_rows;
                             $col_count = $key_row_col;
-                            
+
                             if (!in_array($col->mlid, $childs)) {
                               unset($menu_config->menu_config->{$key_menu}->rows_content[$key_rows][$key_row_col]->col_content[$key_col]);
                               if (!count($menu_config->menu_config->{$key_menu}->rows_content[$key_rows][$key_row_col]->col_content)) {
@@ -686,6 +691,6 @@ class WeMegaMenuBuilder {
         echo drupal_render($view);
         exit;
       }
-    }   
+    }
   }
 }
