@@ -657,13 +657,9 @@ Drupal.WeMegaMenu = Drupal.WeMegaMenu || {};
 
               var prev = curCol.prev('.we-mega-menu-col');
               if (typeof curCol.prev().find('ul').length != 'undefined' && curCol.prev().find('ul').length > 0) {
-                // alert(1);
                 while (typeof prev.attr('data-block') != 'undefined' && prev.attr('data-block').length > 0) {
-                  // alert(2);
                   prev = prev.prev();
                 }
-
-                
 
                 if (typeof prev.find('ul').length != 'undefined' && prev.find('ul').length > 0) {
                   prev.find('ul').append(html);
@@ -676,7 +672,6 @@ Drupal.WeMegaMenu = Drupal.WeMegaMenu || {};
               }
             }
             
-
             // Rebuild event click
             Drupal.WeMegaMenu.clickActions();
             break;
@@ -712,7 +707,6 @@ Drupal.WeMegaMenu = Drupal.WeMegaMenu || {};
                 curCol.next('.we-mega-menu-col').prepend('<ul class="nav nav-tabs subul">' + html + '</ul>');
               }
             }
-            
 
             // Rebuild event click
             Drupal.WeMegaMenu.clickActions();
