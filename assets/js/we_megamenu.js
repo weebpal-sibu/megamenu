@@ -302,9 +302,9 @@ Drupal.WeMegaMenu = Drupal.WeMegaMenu || {};
   };
 
   Drupal.WeMegaMenu.defineToolbarEvent = function() {
-    self.toolbar.find('.we-mega-menu-cbx-animation').once('we-mega-menu-cbx-animation').on('change', function() {
-      Drupal.WeMegaMenu.rebuildMainToolbar();
-    });
+    // self.toolbar.find('.we-mega-menu-cbx-animation').once('we-mega-menu-cbx-animation').on('change', function() {
+    //   Drupal.WeMegaMenu.rebuildMainToolbar();
+    // });
 
     $('.we-mega-menu.we-mega-menu-btn-submenu').once('we-mega-menu-btn-submenu').on('change', function() {
       if ($(this).is(':checked')) {
