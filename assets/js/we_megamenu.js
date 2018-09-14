@@ -491,8 +491,12 @@ Drupal.WeMegaMenu = Drupal.WeMegaMenu || {};
       var width = $(this).val();
       if (self.currentSelected.hasClass('we-mega-menu-submenu')) {
         if (width.length) {
+          width = parseInt(width);
+          width = (width >= 5120) ? 5120 : width; // resolution 5k retina
+          width = (width <= 0) ? '' : width;
           self.currentSelected.attr('data-submenu-width', width);
           self.currentSelected.css('width', width);
+          $(this).val(width);
         } else {
           self.currentSelected.removeAttr('data-submenu-width');
           self.currentSelected.css('width', '');
