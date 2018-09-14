@@ -144,6 +144,18 @@ Drupal.WeMegaMenu = Drupal.WeMegaMenu || {};
       self.toolbar.find('input.we-mega-menu.we-mega-menu-btn-submenu').prop('checked', false);
     }
 
+    if ($(self.currentSelected).find('ul.subul li.we-mega-menu-li').length == 0) {
+      self.toolbar.find('input.we-mega-menu.we-mega-menu-btn-submenu').closest('.submenu-wrapper').show();
+    } else {
+      self.toolbar.find('input.we-mega-menu.we-mega-menu-btn-submenu').closest('.submenu-wrapper').hide();
+    }
+
+    if ($(self.currentSelected).attr('data-level') == '0') {
+      self.toolbar.find('input.we-mega-menu-chx-group').closest('.group-menu-wrapper').hide();
+    } else {
+      self.toolbar.find('input.we-mega-menu-chx-group').closest('.group-menu-wrapper').show();
+    }
+
     if (self.currentSelected.hasAttr('data-class')) {
       var class_val = self.currentSelected.attr('data-class');
       $(self.toolbar).find('.we-mega-menu-txt-extra-class').val(class_val);
