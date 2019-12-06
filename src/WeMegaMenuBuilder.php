@@ -182,7 +182,7 @@ class WeMegaMenuBuilder {
     static $_list_blocks_array = [];
     if (empty($_list_blocks_array)) {
       $theme_default = \Drupal::config('system.theme')->get('default');
-      $block_storage = \Drupal::entityManager()->getStorage('block');
+      $block_storage = \Drupal::entityTypeManager()->getStorage('block');
       $entity_ids = $block_storage->getQuery()->condition('theme', $theme_default)->execute();
       $entities = $block_storage->loadMultiple($entity_ids);
       $_list_blocks_array = [];
@@ -229,7 +229,7 @@ class WeMegaMenuBuilder {
       $block = \Drupal\block\Entity\Block::load($bid);
       if (isset($block) && !empty($block)) {
         $title = $block->label();
-        $block_content = \Drupal::entityManager()
+        $block_content = \Drupal::entityTypeManager()
           ->getViewBuilder('block')
           ->view($block);
 
@@ -458,7 +458,7 @@ class WeMegaMenuBuilder {
                       $col_count = $key_row_col;
                       $positions[] = $row_count . '-' . $col_count . '-' . count($cols);
                       foreach ($cols as $key_col => $col) {
-                        $menu_item = \Drupal::entityManager()
+                        $menu_item = \Drupal::entityTypeManager()
                           ->getStorage('menu_link_content')
                           ->loadByProperties(['uuid' => $col->mlid]);
                         if (is_array($menu_item)) {
@@ -698,7 +698,7 @@ class WeMegaMenuBuilder {
    * Render all drupal view.
    */
   public static function renderView() {
-    $entity_manager = \Drupal::entityManager();
+    $entity_manager = \Drupal::entityTypeManager();
     $views = $entity_manager->getStorage('view')->loadMultiple();
     foreach ($views as $key => $view) {
       $view = \Drupal\views\Views::getView($key);
